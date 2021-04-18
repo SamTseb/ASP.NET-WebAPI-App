@@ -7,7 +7,7 @@ namespace BLayer.Interfaces
 {
     public interface ICarService
     {
-        void Add(Car car);
+        Car Add(Car car);
         void Update(int Id, Car car);
         void Delete(int ID);
         List<Car> Get();

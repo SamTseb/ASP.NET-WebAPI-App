@@ -10,7 +10,7 @@ using DBL;
 
 namespace BLayer.Implementations
 {
-    public class CarService : BaseService, ICarService
+    public class CarService : ICarService
     {
         private AppDBContext context;
         //private List<Car> _cars;
@@ -20,14 +20,15 @@ namespace BLayer.Implementations
             this.context = context;
         }
 
-        public void Add(Car car)
+        public Car Add(Car car)
         {
             try
             {
-                context.cars.Add(car);
+                Car created_car = context.cars.Add(car).Entity;
                 context.SaveChanges();
+                return created_car;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw new Exception("Ошибка при создании машины.");
             }

@@ -10,7 +10,7 @@ using Domain.Models;
 
 namespace BLayer.Implementations
 {
-    public class CategoryService : BaseService, ICategoryService
+    public class CategoryService : /*BaseService,*/ ICategoryService
     {
         private AppDBContext context;
         //private List<Category> _cars;
@@ -20,12 +20,13 @@ namespace BLayer.Implementations
             this.context = context;
         }
 
-        public void Add(Category category)
+        public Category Add(Category category)
         {
             try
             {
-                context.categories.Add(category);
+                Category created_category = context.categories.Add(category).Entity;
                 context.SaveChanges();
+                return created_category;
             }
             catch (Exception)
             {
